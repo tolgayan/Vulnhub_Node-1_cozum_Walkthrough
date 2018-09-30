@@ -124,11 +124,17 @@ app.js dosyasının içe baktıgımızda const url: ... şeklinde bir kod var. B
   <img src="https://github.com/tolgayan/Vulnhub_Node-1_cozum_Walkthrough/blob/master/node.js/13.PNG" width="800" title="hover text">  
 </p>
  Bu username ve password ile ssh bağlantısı yapmayı deneyelim.
+ 
  ```
  ssh mark@192.168.149.142
  ```
+ 
 <p align="center">
   <img src="https://github.com/tolgayan/Vulnhub_Node-1_cozum_Walkthrough/blob/master/node.js/14.PNG" width="800" title="hover text">  
 </p>
 
 makineye giriş yaptık ve user olduk!!
+
+## privelage escalation
+
+artık root yetkileri almamız lazım.
