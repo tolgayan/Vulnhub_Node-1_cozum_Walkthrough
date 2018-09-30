@@ -10,8 +10,6 @@ HackTheBox makinelerinin kolay bir versiyonuna benzeyen bu makine özellikle yen
 
 Kali Makinemizi açalım ve vulnarable makinenin ip'sini tespit etmek için arp-scan kullanalım.
 
-```ruby
-  def foo
-    puts 'bar'
-  end
+```
+arp-scan --local
 ```
