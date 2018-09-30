@@ -13,4 +13,7 @@ Kali Makinemizi açalım ve vulnarable makinenin ip'sini tespit etmek için arp-
 ```
 arp-scan --local
 ```
-https://github.com/tolgayan/Vulnhub_Node-1_cozum_Walkthrough/blob/master/node.js/1.PNG
+
+<p align="center">
+  <img src="https://github.com/tolgayan/Vulnhub_Node-1_cozum_Walkthrough/blob/master/node.js/1.PNG" width="800" title="hover text">  
+</p>
