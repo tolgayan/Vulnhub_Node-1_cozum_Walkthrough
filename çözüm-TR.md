@@ -64,6 +64,8 @@ en üstteki admin gibi duruyor. username elimizde fakat parola hash ile encrypt 
 
 Eğer hash çözülemeseydi brute force ile kırmayı deneyecektim.
 
+## Penetration
+
 Bulduğumuz username ve password ile login sayfasından giriş yapmayı deneyelim.
 
 <p align="center">
@@ -74,3 +76,59 @@ Bulduğumuz username ve password ile login sayfasından giriş yapmayı deneyeli
   <img src="https://github.com/tolgayan/Vulnhub_Node-1_cozum_Walkthrough/blob/master/node.js/8.PNG" width="800" title="hover text">  
 </p>
 
+Bir indirme linki çıktı ve bir backup dosyası bilgisayarımıza indi.
+Tavsiyem, vulnhub tarzı bir sitede makine çözmeye çalışırken indirdiğiniz dosyaların içerisine ilk önce xxd ile bakmanızdır.
+Bunun amacı ise içerisinde saklanmış olan başka bir dosya olup olmadığını kontrol etmek, veya indirdiğimiz dosyanın encrypt edilip edilmediğini anlamak.
+
+```
+xxd myplace.backup
+```
+
+<p align="center">
+  <img src="https://github.com/tolgayan/Vulnhub_Node-1_cozum_Walkthrough/blob/master/node.js/9.PNG" width="800" title="hover text">  
+</p>
+
+xxd ile dosyaları incelemeye alışık olan biri bunun normal bir dosya görüntüsü olmadıgını anlayabilir. "=" ile bitiyor olması bana base64 ile şifrelenmiş olabileceği mesajını veriyor.
+
+base64 ile decode edip zip dosyasına çevirelim.
+
+```
+base64 -d myplace.backup > myplace.zip
+```
+<p align="center">
+  <img src="https://github.com/tolgayan/Vulnhub_Node-1_cozum_Walkthrough/blob/master/node.js/10.PNG" width="800" title="hover text">  
+</p>
+
+Zip dosyasının içine bakalım:
+
+<p align="center">
+  <img src="https://github.com/tolgayan/Vulnhub_Node-1_cozum_Walkthrough/blob/master/node.js/11.PNG" width="800" title="hover text">  
+</p>
+
+Görünüşe göre parola ile korunan bazı dosyalar var.
+
+```
+fcrackzip -u -D -p /usr/share/wordlists/rockyou.txt myplace.zip
+```
+not: ilgili dizindeki rockyou.txt dosyası normalde sıkıştırılmış bir halde orda bulunmaktadır. Onu önceden o klasöre çıkartmıştım. Bu komutu kullanmadan önce rockyou.txt yi unzip ettiğinizden emin olun.
+
+<p align="center">
+  <img src="https://github.com/tolgayan/Vulnhub_Node-1_cozum_Walkthrough/blob/master/node.js/12.PNG" width="800" title="hover text">  
+</p>
+
+şifre: magicword
+
+app.js dosyasının içe baktıgımızda const url: ... şeklinde bir kod var. Burada kullanıcı adı mark ve ":" ile "@" işareti arasındaki kısım da şifre.
+
+<p align="center">
+  <img src="https://github.com/tolgayan/Vulnhub_Node-1_cozum_Walkthrough/blob/master/node.js/13.PNG" width="800" title="hover text">  
+</p>
+ Bu username ve password ile ssh bağlantısı yapmayı deneyelim.
+ ```
+ ssh mark@192.168.149.142
+ ```
+<p align="center">
+  <img src="https://github.com/tolgayan/Vulnhub_Node-1_cozum_Walkthrough/blob/master/node.js/14.PNG" width="800" title="hover text">  
+</p>
+
+makineye giriş yaptık ve user olduk!!
