@@ -138,3 +138,35 @@ makineye giriş yaptık ve user olduk!!
 ## privelage escalation
 
 artık root yetkileri almamız lazım.
+
+Bu noktadan sonra birbirinden farklı çözümler mevcut. Ben standart bir yol ile root yetkileri alacagım. Pratik olması açısından diğer yöntemleri de araştırmanızı ve incelemenizi tavsiye ederim.
+
+Hedef makineyi açtığımızda sahip olduğu linux versiyonunun 16.4 olduğu görülüyor. Google da bu version için bir local privelage escalation scripti aratalım.
+
+<p align="center">
+  <img src="https://github.com/tolgayan/Vulnhub_Node-1_cozum_Walkthrough/blob/master/node.js/15.PNG" width="800" title="hover text">  
+</p>
+
+C++ ile yazılmış bir script buldum. Bu scripti hedef makineye göndermeli compile etmeli ve çalıştırmalıyız.
+
+script dosyasını scp ile hedef makinenin /tmp dizinine gönderelim.
+```
+scp 44298.c mark@192.168.149.142:/tmp
+```
+<p align="center">
+  <img src="https://github.com/tolgayan/Vulnhub_Node-1_cozum_Walkthrough/blob/master/node.js/16.PNG" width="800" title="hover text">  
+</p>
+
+Ardından gcc ile compile edelim ve çalıştıralım.
+
+<p align="center">
+  <img src="https://github.com/tolgayan/Vulnhub_Node-1_cozum_Walkthrough/blob/master/node.js/17.PNG" width="800" title="hover text">  
+</p>
+
+Root yetkilerini aldık!!
+Root dizininde flag bizi bekliyor.
+
+<p align="center">
+  <img src="https://github.com/tolgayan/Vulnhub_Node-1_cozum_Walkthrough/blob/master/node.js/18.PNG" width="800" title="hover text">  
+</p>
+
